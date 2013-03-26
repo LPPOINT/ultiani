@@ -47,11 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationModel\TimeLine.cs" />
+    <Compile Include="Common\FPSCutManager.cs" />
+    <Compile Include="Common\Pair.cs" />
     <Compile Include="Common\SpendTimeInfo.cs" />
     <Compile Include="DebugHelping\DebugBatching.cs" />
+    <Compile Include="DebugHelping\DebugEnityBatching.cs" />
+    <Compile Include="DebugHelping\DebugEntityAnimation.cs" />
     <Compile Include="DebugHelping\DebugEntityCache.cs" />
     <Compile Include="DebugHelping\DebugEntityState.cs" />
+    <Compile Include="DebugHelping\DebugHelp.cs" />
     <Compile Include="DebugHelping\DebugPositionBatch.cs" />
+    <Compile Include="DebugHelping\DebugTimeLine.cs" />
     <Compile Include="Debug\CommandSubmittedEventArgs.cs" />
     <Compile Include="Debug\DebugButtonInput.cs" />
     <Compile Include="Debug\DebugCommandButtonInput.cs" />
@@ -68,22 +75,22 @@
     <Compile Include="EntityModel\Animating\AnimatingNode.cs" />
     <Compile Include="EntityModel\Animating\Animation2Info.cs" />
     <Compile Include="EntityModel\Animating\Animation3Info.cs" />
-    <Compile Include="EntityModel\Animating\IUpdater.cs" />
+    <Compile Include="EntityModel\Animating\BoneAnimationInfo.cs" />
+    <Compile Include="EntityModel\Animating\EntityAnimationInfo.cs" />
     <Compile Include="EntityModel\CachePacket.cs" />
-    <Compile Include="EntityModel\EntityBase.cs" />
-    <Compile Include="EntityModel\EntityLogicPositionBatch.cs" />
-    <Compile Include="EntityModel\EntityVisiblePositionBatch.cs" />
+    <Compile Include="EntityModel\BaseEntity.cs" />
+    <Compile Include="EntityModel\EntityBatch.cs" />
+    <Compile Include="EntityModel\EntityIndexBatch.cs" />
     <Compile Include="EntityModel\ICachedElement.cs" />
-    <Compile Include="EntityModel\EntityPositionBatch.cs" />
-    <Compile Include="EntityModel\VectorSpriteEntity.cs" />
+    <Compile Include="EntityModel\TexturableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Start.cs" />
     <Compile Include="State1.cs" />
     <Compile Include="State2.cs" />
-    <Compile Include="VectorModel\ClosedLineList.cs" />
     <Compile Include="VectorModel\LineList.cs" />
+    <Compile Include="VectorModel\QuadLineList.cs" />
     <Compile Include="VectorModel\TransformatableBoneForm.cs" />
-    <Compile Include="VectorModel\LinePair.cs" />
+    <Compile Include="VectorModel\Line.cs" />
     <Compile Include="VertexAnimationApplication.cs" />
   </ItemGroup>
   <ItemGroup>

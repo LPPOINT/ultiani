@@ -3,27 +3,27 @@ using UltimateAnimate.EntityModel;
 
 namespace UltimateAnimate.DebugHelping
 {
-    public static class DebugEntityState
+    public  class DebugEntityState
     {
-        public static EntityBase Entity { get; set; }
+        public  BaseEntity BaseEntity { get; set; }
 
-        private static bool SplitBool(bool value)
+        private  bool SplitBool(bool value)
         {
             return !value;
         }
 
-        public static void Initialize(EntityBase entity, DebugInput wireframeState, DebugInput visibleState, DebugInput logicState = null)
+        public  void Initialize(BaseEntity baseEntity, DebugInput wireframeState, DebugInput visibleState, DebugInput logicState = null)
         {
-            Entity = entity;
+            BaseEntity = baseEntity;
 
             wireframeState.Activated +=
-                (sender, args) => Entity.IsWireframeVisible = SplitBool(Entity.IsWireframeVisible);
+                (sender, args) => BaseEntity.IsWireframeVisible = SplitBool(BaseEntity.IsWireframeVisible);
             visibleState.Activated += 
-                (sender, args) => Entity.IsVisible = SplitBool(Entity.IsVisible);
+                (sender, args) => BaseEntity.IsVisible = SplitBool(BaseEntity.IsVisible);
 
             if (logicState!=null)
             {
-                logicState.Activated += (sender, args) => Entity.IsLogical = SplitBool(Entity.IsLogical);
+                logicState.Activated += (sender, args) => BaseEntity.IsLogical = SplitBool(BaseEntity.IsLogical);
             }
         }
 

@@ -31,7 +31,7 @@ namespace UltimateAnimate.Debug
         {
             if (comboBox1.SelectedItem != null)
             {
-                DebugWindow.OnCommandSubmitted(new CommandSubmittedEventArgs(comboBox1.SelectedItem as string));
+                DebugWindow.OnCommandSubmitted(new CommandSubmittedEventArgs(comboBox1.SelectedItem as string, arguments.Text));
             }
         }
 

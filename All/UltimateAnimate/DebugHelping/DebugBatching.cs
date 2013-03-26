@@ -2,16 +2,16 @@
 
 namespace UltimateAnimate.DebugHelping
 {
-    public class DebugBatching : EntityPositionBatch
+    public class DebugBatching : EntityIndexBatch
     {
-        protected override int GetEntityPosition(EntityBase entity)
+        protected override int GetEntityPosition(BaseEntity baseEntity)
         {
-            return entity.GlobalIndex;
+            return baseEntity.GlobalIndex;
         }
 
-        protected override void MakeAction(EntityBase entity)
+        protected override void MakeAction(BaseEntity baseEntity)
         {
-            Debug.DebugWindow.AddLine(" ------called entity with id = " + entity.GlobalIndex);
+            Debug.DebugWindow.AddLine(" ------called BaseEntity with id = " + baseEntity.GlobalIndex);
         }
     }
 }

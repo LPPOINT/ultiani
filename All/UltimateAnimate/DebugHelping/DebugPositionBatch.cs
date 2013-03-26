@@ -6,34 +6,34 @@ using UltimateAnimate.EntityModel;
 
 namespace UltimateAnimate.DebugHelping
 {
-    public static class DebugPositionBatch
+    public  class DebugPositionBatch
     {
-        public static EntityPositionBatch PositionBatch { get; set; }
-        public static List<EntityBase> Entitys { get; set; }
+        public  EntityIndexBatch Batch { get; set; }
+        public  List<BaseEntity> Entitys { get; set; }
 
-        public static void CreateBatching()
+        public  void CreateBatching()
         {
 
             var timer = new SpendTimeInfo();
             timer.Start();
 
             DebugWindow.AddLine("----Debugging start!----");
-            PositionBatch.Begin();
+            Batch.Begin();
 
             foreach (var entityBase in Entitys)
             {
-               DebugWindow.AddLine("----Entity added with id = " + entityBase.GlobalIndex + " ----");
-               PositionBatch.AddEntity(entityBase);
+               DebugWindow.AddLine("----BaseEntity added with id = " + entityBase.GlobalIndex + " ----");
+               Batch.AddEntity(entityBase);
             }
 
-            PositionBatch.End();
+            Batch.End();
             DebugWindow.AddLine("----Debugging complete! ( " + (int)timer.GetDuration().TotalMilliseconds + "ms  spended ) ----");
         }
 
-        public static void Initialize(EntityPositionBatch positionBatch, DebugInput batchingInput, params EntityBase[] entitys)
+        public  void Initialize(EntityIndexBatch batch, DebugInput batchingInput, params BaseEntity[] baseEntities)
         {
-            PositionBatch = positionBatch;
-            Entitys = new List<EntityBase>(entitys);
+            Batch = batch;
+            Entitys = new List<BaseEntity>(baseEntities);
             batchingInput.Activated += (sender, args) => CreateBatching();
         }
 

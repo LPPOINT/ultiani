@@ -8,25 +8,27 @@ using UltimateAnimate.VectorModel;
 
 namespace UltimateAnimate.DebugHelping
 {
-    public static class DebugEntityCache
+    public  class DebugEntityCache
     {
-        public static EntityBase Entity { get; set; }
-        private static TimeSpan lastCacheSaveTime;
+        public  BaseEntity BaseEntity { get; set; }
+        private  TimeSpan lastCacheSaveTime;
 
-        public static void SaveCache()
+        public  void SaveCache()
         {
             lastCacheSaveTime = GameTimeInfo.TotalTime;
-            Entity.CreateCache(lastCacheSaveTime);
+            BaseEntity.CreateCache(lastCacheSaveTime);
+            DebugWindow.AddLine("cache saved!");
         }
-        public static void LoadCache()
+        public  void LoadCache()
         {
-            Entity.LoadCache(lastCacheSaveTime);
+            BaseEntity.LoadCache(lastCacheSaveTime);
+            DebugWindow.AddLine("cache loaded!");
         }
 
-        public static void Initialize(DebugInput saveInput, DebugInput loadInput, EntityBase entity = null, bool animateEntiy = true)
+        public  void Initialize(DebugInput saveInput, DebugInput loadInput, BaseEntity baseEntity = null, bool animateEntiy = true)
         {
-            if (entity != null)
-                Entity = entity;
+            if (baseEntity != null)
+                BaseEntity = baseEntity;
             if(!DebugWindow.IsWindowCreated)
                 DebugWindow.CreateDebugWindow();
             lastCacheSaveTime = new TimeSpan();
@@ -37,12 +39,12 @@ namespace UltimateAnimate.DebugHelping
 
             if (animateEntiy)
             {
-                if (entity != null)
-                    entity.UpdateCalled += (sender, args) =>
+                if (baseEntity != null)
+                    baseEntity.UpdateCalled += (sender, args) =>
                                                {
-                                                   entity.Form.TranslateLine(1, LineList.TranslationType.ByLine,
+                                                   baseEntity.Form.TranslateLine(1, LineList.TranslationType.ByLine,
                                                                              new Vector2(0.1f, 0.1f));
-                                                   entity.Form.TranslateLine(3, LineList.TranslationType.ByLine,
+                                                   baseEntity.Form.TranslateLine(3, LineList.TranslationType.ByLine,
                                                                              new Vector2(-0.1f, -0.1f));
                                                };
             }

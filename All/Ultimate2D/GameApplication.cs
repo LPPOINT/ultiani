@@ -60,6 +60,8 @@ namespace Ultimate2D
             IsMouseVisible = info.IsMouseVisible;
             Window.Title = info.WindowTitle;
             Window.AllowUserResizing = info.IsResizingAllowed;
+            graphics.PreferredBackBufferWidth = info.WindowWidth;
+            graphics.PreferredBackBufferHeight = info.WindowHeight;
 
         }
 

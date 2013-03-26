@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using UltimateAnimate.Common;
 
 namespace UltimateAnimate.VectorModel
 {
     public class LineList : ICloneable
     {
-        private const int TOP_LEFT = 0;
-        private const int TOP_RIGHT = 1;
-        private const int BOTTOM_RIGHT = 2;
-        private const int BOTTOM_LEFT = 3;
+        private const int topLeft = 0;
+        private const int topRight = 1;
+        private const int bottomRight = 2;
+        private const int bottomLeft = 3;
 
         public enum TranslationType
         {
@@ -46,28 +45,8 @@ namespace UltimateAnimate.VectorModel
             if (handler != null) handler(this, EventArgs.Empty);
         }
 
-        public void Scale(Vector2 scale)
-        {
-            
-        }
-        public void Rotate(float angle)
-        {
-            
-        }
-        public void Translate(Vector2 translation)
-        {
-            foreach (var line in Lines)
-            {
-                line.Start += translation;
-                OnTransformChanged();
-            }
-        }
-
         public void TranslateLine(int lineIndex, TranslationType type, Vector2 translate, LineSide side = LineSide.Start)
         {
-
-            var timer = new SpendTimeInfo();
-            timer.Start();
 
             if (side == LineSide.End)
             {
@@ -85,11 +64,8 @@ namespace UltimateAnimate.VectorModel
                         lines[lineIndex + 1].Start += translate;
                 lines[lineIndex - 1].End = lines[lineIndex].Start;
             }
-            var a = timer.GetDuration();
             OnTransformChanged();
         }
-
-
 
         private int count = -1;
         private Vector2 GetTextureCoordinate()
@@ -104,30 +80,19 @@ namespace UltimateAnimate.VectorModel
         }
         public VertexPositionTexture[] GetTrangleStripVertexesPositions() 
         {
-            var list = new List<VertexPositionTexture>();
-            foreach (var line in Lines)
-            {
-                list.Add(new VertexPositionTexture(new Vector3(line.Start.X, line.Start.Y, 0), GetTextureCoordinate()));
-            }
-            return list.ToArray();
+            return Lines.Select(line => new VertexPositionTexture(new Vector3(line.Start.X, line.Start.Y, 0), GetTextureCoordinate())).ToArray();
         }
         public int[] GetTrangleStripPrimitiveIndexses()
         {
-            //var list = new List<int>();
 
-            //for (var i = 0; i <= lines.Count-1; i++)
-            //{
-            //    list.Add(i);   
-            //}
-            //return list.ToArray();
             var  indexData = new int[6];
-            indexData[0] = TOP_LEFT;
-            indexData[1] = BOTTOM_RIGHT;
-            indexData[2] = BOTTOM_LEFT;
+            indexData[0] = topLeft;
+            indexData[1] = bottomRight;
+            indexData[2] = bottomLeft;
 
-            indexData[3] = TOP_LEFT;
-            indexData[4] = TOP_RIGHT;
-            indexData[5] = BOTTOM_RIGHT;
+            indexData[3] = topLeft;
+            indexData[4] = topRight;
+            indexData[5] = bottomRight;
             return indexData;
         }
 

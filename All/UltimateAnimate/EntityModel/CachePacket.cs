@@ -15,35 +15,35 @@ namespace UltimateAnimate.EntityModel
         public Dictionary<string, TimeSpan> Times { get; private set; }
         public Dictionary<string, object> Objects { get; private set; }
         public Dictionary<string, Color> Colors { get; private set; }
-        public Animation3Info Animating { get; set; }
+        public EntityAnimationInfo Animating { get; set; }
 
-        public static CachePacket CreateDefault(EntityBase entity)
+        public static CachePacket CreateDefault(BaseEntity baseEntity)
         {
             var newCache = new CachePacket();
 
-            newCache.Vectors.Add("position", entity.Position);
-            newCache.Vectors.Add("scale", entity.Scale);
-            newCache.Floats.Add("rotation", entity.Rotation);
-            newCache.Colors.Add("color", entity.Color);
-            newCache.Bools.Add("isVisible", entity.IsVisible);
-            newCache.Bools.Add("isLogical", entity.IsLogical);
-            newCache.Ints.Add("renderLayer", entity.RenderPosition);
-            newCache.Ints.Add("updateLayer", entity.UpdatePosition);
-            newCache.Animating = entity.Animating;
+            newCache.Vectors.Add("position", baseEntity.Position);
+            newCache.Vectors.Add("scale", baseEntity.Scale);
+            newCache.Floats.Add("rotation", baseEntity.Rotation);
+            newCache.Colors.Add("color", baseEntity.Color);
+            newCache.Bools.Add("isVisible", baseEntity.IsVisible);
+            newCache.Bools.Add("isLogical", baseEntity.IsLogical);
+            newCache.Ints.Add("renderLayer", baseEntity.RenderPosition);
+            newCache.Ints.Add("updateLayer", baseEntity.UpdatePosition);
+            newCache.Animating = baseEntity.Animating.Clone() as EntityAnimationInfo;
 
             return newCache;
         }
-        public static void LoadDefault(EntityBase entity, CachePacket cache)
+        public static void LoadDefault(BaseEntity baseEntity, CachePacket cache)
         {
-            entity.Scale = cache.Vectors["scale"];
-            entity.Position = cache.Vectors["position"];
-            entity.Rotation = cache.Floats["rotation"];
-            entity.Color = cache.Colors["color"];
-            entity.IsLogical = cache.Bools["isLogical"];
-            entity.IsVisible = cache.Bools["isVisible"];
-            entity.RenderPosition = cache.Ints["renderLayer"];
-            entity.UpdatePosition = cache.Ints["updateLayer"];
-            entity.Animating = cache.Animating;
+            baseEntity.Scale = cache.Vectors["scale"];
+            baseEntity.Position = cache.Vectors["position"];
+            baseEntity.Rotation = cache.Floats["rotation"];
+            baseEntity.Color = cache.Colors["color"];
+            baseEntity.IsLogical = cache.Bools["isLogical"];
+            baseEntity.IsVisible = cache.Bools["isVisible"];
+            baseEntity.RenderPosition = cache.Ints["renderLayer"];
+            baseEntity.UpdatePosition = cache.Ints["updateLayer"];
+            baseEntity.Animating = cache.Animating;
 
         }
 
