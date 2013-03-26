@@ -1,0 +1,13 @@
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\UltimateTest.pdb
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.dll
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.Game.dll
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.Graphics.dll
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Ultimate2D.dll
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Ultimate2D.pdb
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.xml
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.Game.xml
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\Microsoft.Xna.Framework.Graphics.xml
+C:\aMain\Craft\Ultimate2D\UltimateTest\obj\Debug\UltimateTest.csprojResolveAssemblyReference.cache
+C:\aMain\Craft\Ultimate2D\UltimateTest\obj\Debug\UltimateTest.pdb
+C:\aMain\Craft\Ultimate2D\UltimateTest\bin\Debug\UltimateTest.exe
+C:\aMain\Craft\Ultimate2D\UltimateTest\obj\Debug\UltimateTest.exe

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ultimate2D", "Ultimate2D\Ultimate2D.csproj", "{A20B4E9B-8526-4294-BD41-3C441C22C218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltimateAnimate", "UltimateAnimate\UltimateAnimate.csproj", "{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A20B4E9B-8526-4294-BD41-3C441C22C218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A20B4E9B-8526-4294-BD41-3C441C22C218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A20B4E9B-8526-4294-BD41-3C441C22C218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A20B4E9B-8526-4294-BD41-3C441C22C218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

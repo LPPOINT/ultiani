@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{04DFC313-5213-4C3E-A9BB-EE6B94F9C48F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UltimateAnimate</RootNamespace>
+    <AssemblyName>UltimateAnimate</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Xna.Framework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Game, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="Microsoft.Xna.Framework.Graphics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=x86" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\SpendTimeInfo.cs" />
+    <Compile Include="DebugHelping\DebugBatching.cs" />
+    <Compile Include="DebugHelping\DebugEntityCache.cs" />
+    <Compile Include="DebugHelping\DebugEntityState.cs" />
+    <Compile Include="DebugHelping\DebugPositionBatch.cs" />
+    <Compile Include="Debug\CommandSubmittedEventArgs.cs" />
+    <Compile Include="Debug\DebugButtonInput.cs" />
+    <Compile Include="Debug\DebugCommandButtonInput.cs" />
+    <Compile Include="Debug\DebugCommandInput.cs" />
+    <Compile Include="Debug\DebugForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Debug\DebugForm.Designer.cs">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Debug\DebugInput.cs" />
+    <Compile Include="Debug\DebugWindow.cs" />
+    <Compile Include="Debug\UseButtonEventArgs.cs" />
+    <Compile Include="EntityModel\Animating\AnimatingNode.cs" />
+    <Compile Include="EntityModel\Animating\Animation2Info.cs" />
+    <Compile Include="EntityModel\Animating\Animation3Info.cs" />
+    <Compile Include="EntityModel\Animating\IUpdater.cs" />
+    <Compile Include="EntityModel\CachePacket.cs" />
+    <Compile Include="EntityModel\EntityBase.cs" />
+    <Compile Include="EntityModel\EntityLogicPositionBatch.cs" />
+    <Compile Include="EntityModel\EntityVisiblePositionBatch.cs" />
+    <Compile Include="EntityModel\ICachedElement.cs" />
+    <Compile Include="EntityModel\EntityPositionBatch.cs" />
+    <Compile Include="EntityModel\VectorSpriteEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Start.cs" />
+    <Compile Include="State1.cs" />
+    <Compile Include="State2.cs" />
+    <Compile Include="VectorModel\ClosedLineList.cs" />
+    <Compile Include="VectorModel\LineList.cs" />
+    <Compile Include="VectorModel\TransformatableBoneForm.cs" />
+    <Compile Include="VectorModel\LinePair.cs" />
+    <Compile Include="VertexAnimationApplication.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ultimate2D\Ultimate2D.csproj">
+      <Project>{a20b4e9b-8526-4294-bd41-3c441c22c218}</Project>
+      <Name>Ultimate2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Debug\DebugForm.resx">
+      <DependentUpon>DebugForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
