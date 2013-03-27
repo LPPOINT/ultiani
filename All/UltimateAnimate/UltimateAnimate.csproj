@@ -47,7 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnimationModel\AnimationKeys.cs" />
+    <Compile Include="AnimationModel\AnimationManager.cs" />
+    <Compile Include="AnimationModel\EntityHandler.cs" />
     <Compile Include="AnimationModel\TimeLine.cs" />
+    <Compile Include="AnimationModel\TimeSpanComparer.cs" />
     <Compile Include="Common\FPSCutManager.cs" />
     <Compile Include="Common\Pair.cs" />
     <Compile Include="Common\SpendTimeInfo.cs" />
@@ -55,6 +59,7 @@
     <Compile Include="DebugHelping\DebugEnityBatching.cs" />
     <Compile Include="DebugHelping\DebugEntityAnimation.cs" />
     <Compile Include="DebugHelping\DebugEntityCache.cs" />
+    <Compile Include="DebugHelping\DebugEntityHandler.cs" />
     <Compile Include="DebugHelping\DebugEntityState.cs" />
     <Compile Include="DebugHelping\DebugHelp.cs" />
     <Compile Include="DebugHelping\DebugPositionBatch.cs" />
@@ -77,6 +82,7 @@
     <Compile Include="EntityModel\Animating\Animation3Info.cs" />
     <Compile Include="EntityModel\Animating\BoneAnimationInfo.cs" />
     <Compile Include="EntityModel\Animating\EntityAnimationInfo.cs" />
+    <Compile Include="EntityModel\Animating\EntityAnimationList.cs" />
     <Compile Include="EntityModel\CachePacket.cs" />
     <Compile Include="EntityModel\BaseEntity.cs" />
     <Compile Include="EntityModel\EntityBatch.cs" />
