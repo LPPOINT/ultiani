@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ultimate2D;
+using UltimateAnimate.Debug;
 using UltimateAnimate.EntityModel;
 using UltimateAnimate.EntityModel.Animating;
 
@@ -77,12 +79,17 @@ namespace UltimateAnimate.AnimationModel
             return new TimeSpan();
         }
 
+        private TimeSpan dbgLastHookTime;
+
         internal void Hook(TimeSpan time)
         {
             if(Entity == null)
                 throw new Exception("open animation error: cant fint parent entity");
             EntityAnimationInfo animation;
             
+            DebugWindow.AddLine("Hooked! Time from last hook is: " + (int)(GameTimeInfo.TotalTime - dbgLastHookTime).TotalMilliseconds);
+            dbgLastHookTime = GameTimeInfo.TotalTime;
+
             if (ShouldActivate(time) 
                 && Animations.TryGetValue(FindNearTime(time), out animation))
             {
@@ -92,6 +99,7 @@ namespace UltimateAnimate.AnimationModel
 
         public EntityHandler(TimeLine timeLine, IDictionary<TimeSpan, EntityAnimationInfo> anims = null)
         {
+            dbgLastHookTime = new TimeSpan();
             TimeLine = timeLine;
             Animations = new Dictionary<TimeSpan, EntityAnimationInfo>();
             if (anims != null)

@@ -145,6 +145,12 @@ namespace UltimateAnimate.EntityModel
 
         }
 
+        public TexturableEntity(Vector2 position, Texture2D texture)
+            : this(new QuadLineList(position, texture.Width, texture.Height), texture)
+        {
+            
+        }
+
         public TexturableEntity(LineList form, Texture2D texture) : base(form)
         {
 
