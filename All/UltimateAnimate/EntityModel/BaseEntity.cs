@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Ultimate2D;
 using UltimateAnimate.AnimationModel;
@@ -37,6 +39,39 @@ namespace UltimateAnimate.EntityModel
         public bool IsVisible { get; set; }
         public bool IsWireframeVisible { get; set; }
 
+        public BaseEntity Parent { get; internal set; }
+
+        public List<BaseEntity> childs;
+        public ReadOnlyCollection<BaseEntity> Childs { get { return childs.AsReadOnly(); } }
+
+        public void AddChild(BaseEntity child)
+        {
+            childs.Add(child);
+            child.Parent = this;
+        }
+        public void RemoveChild(BaseEntity child)
+        {
+            child.Parent = null;
+            childs.Remove(child);
+        }
+
+        public BaseEntity GetChildById(int id)
+        {
+            return Childs.FirstOrDefault(baseEntity => baseEntity.GlobalIndex == id);
+        }
+        public BaseEntity GetChildByIndex(int index)
+        {
+            try
+            {
+                return childs[index];
+            }
+            catch (Exception e)
+            {
+                
+            }
+            return null;
+        }
+
         public TimeSpan TotalVisibleTime { get; private set; }
 
         public abstract Vector2 Position { get; set; }
@@ -44,6 +79,20 @@ namespace UltimateAnimate.EntityModel
         public abstract Vector2 Scale { get; set; }
 
         public abstract Color Color { get; set; }
+
+        public event EventHandler<EntityEventArgs> ChildAdded;
+        protected virtual void OnChildAdded(EntityEventArgs e)
+        {
+            var handler1 = ChildAdded;
+            if (handler1 != null) handler1(this, e);
+        }
+
+        public event EventHandler<EntityEventArgs> ChildRemoved;
+        protected virtual void OnChildRemoved(EntityEventArgs e)
+        {
+            var handler1 = ChildRemoved;
+            if (handler1 != null) handler1(this, e);
+        }
 
         public event EventHandler<EventArgs> RenderCalled;
         protected virtual void OnRenderCalled()
@@ -75,6 +124,10 @@ namespace UltimateAnimate.EntityModel
                    UpdateAnimation(Animating);
                 Update();
                 OnUpdateCalled();
+                foreach (var baseEntity in Childs)
+                {
+                    baseEntity.UpdateTick();
+                }
             }
         }
         internal void RenderTick()
@@ -88,6 +141,11 @@ namespace UltimateAnimate.EntityModel
             {
                 RenderWireframe();
                 OnRenderWireframeCalled();
+            }
+            if (IsVisible == false) return;
+            foreach (var baseEntity in Childs)
+            {
+                baseEntity.RenderTick();
             }
         }
 
@@ -123,9 +181,9 @@ namespace UltimateAnimate.EntityModel
 
         protected virtual void UpdateAnimation(EntityAnimationInfo animating)
         {
-            Position += animating.PositionOffset;
-            Rotation += animating.RotationOffset;
-            Scale += animating.ScaleOffset;
+            Position += animating.PositionOffset * (float) GameTimeInfo.LastUpdateDelta.TotalMilliseconds;
+            Rotation += animating.RotationOffset * (float)GameTimeInfo.LastUpdateDelta.TotalMilliseconds;
+            Scale += animating.ScaleOffset * (float)GameTimeInfo.LastUpdateDelta.TotalMilliseconds;
 
             if(animating.BoneAnimationInfo == null) return;
 
@@ -144,10 +202,22 @@ namespace UltimateAnimate.EntityModel
         {
             Cache = new Dictionary<TimeSpan, CachePacket>();
             Form = new TransformatableBoneForm(form);
+            childs = new List<BaseEntity>();
             IsLogical = true;
             IsVisible = true;
             IsWireframeVisible = true;
             GlobalIndex = lastGI++;
         }
     }
+
+    public class EntityEventArgs : EventArgs
+    {
+        public EntityEventArgs(BaseEntity entity)
+        {
+            Entity = entity;
+        }
+
+        public BaseEntity Entity { get; private set; }
+    }
+
 }

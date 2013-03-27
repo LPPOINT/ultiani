@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UltimateAnimate.Debug;
 using UltimateAnimate.EntityModel.Animating;
 
 namespace UltimateAnimate.AnimationModel
 {
-    public struct AnimationKeys
+    public class AnimationKeys
     {
 
         public Dictionary<TimeSpan, EntityAnimationInfo> Keys { get; private set; }
@@ -12,20 +15,25 @@ namespace UltimateAnimate.AnimationModel
 
         private void SortKeysByTime()
         {
-            var newDict = new SortedDictionary<TimeSpan, EntityAnimationInfo>();
-            var currentMin = new TimeSpan();
-            foreach (var entityAnimationInfo in Keys)
-            {
-                if()
-            }
-        } 
-        private KeyValuePair<TimeSpan, EntityAnimationInfo> NextKey(TimeSpan time)
-        {
-          
+            var sorted = new SortedDictionary<TimeSpan, EntityAnimationInfo>(Keys, new TimeSpanComparer());
+            Keys = new Dictionary<TimeSpan, EntityAnimationInfo>(sorted);
         }
-        private KeyValuePair<TimeSpan, EntityAnimationInfo> PrevKey(TimeSpan time)
+
+        private TimeSpan NextKeyTime(TimeSpan time)
         {
-            
+            var list = Keys.Keys.Where(timeSpan => timeSpan > time).ToList();
+            var sortedList = new SortedSet<TimeSpan>(list, new TimeSpanComparer());
+            TimeSpan value;
+
+            try
+            {
+                value = sortedList.ToArray()[0];
+            }
+            catch
+            {
+                return new TimeSpan(0, 0, 0, 0);
+            }
+            return value;
         }
 
         public EntityHandler CreateHandler(TimeLine timeLine)
@@ -34,24 +42,30 @@ namespace UltimateAnimate.AnimationModel
             var handler = new EntityHandler(timeLine);
             foreach (var entityAnimationInfo in Keys)
             {
-                var next = NextKey(entityAnimationInfo.Key);
-                if (next.Value != null)
+                EntityAnimationInfo next;
+                var nextKeyTime = NextKeyTime(entityAnimationInfo.Key);
+                if (Keys.TryGetValue(nextKeyTime, out next))
                 {
+                    var duration = nextKeyTime - entityAnimationInfo.Key;
                     var posAnim = AnimationManager.GetVectorStepAnimation(entityAnimationInfo.Value.PositionOffset,
-                                                                          next.Value.PositionOffset,
-                                                                          next.Key - entityAnimationInfo.Key);
-                    var scaleAnim = AnimationManager.GetVectorStepAnimation(entityAnimationInfo.Value.ScaleOffset,
-                                                                          next.Value.ScaleOffset,
-                                                                          next.Key - entityAnimationInfo.Key);
+                                                                          next.PositionOffset,
+                                                                         duration);
                     var rotAnim = AnimationManager.GetFloatStepAnimation(entityAnimationInfo.Value.RotationOffset,
-                                                                          next.Value.RotationOffset,
-                                                                          next.Key - entityAnimationInfo.Key);
-                    // TODO: Make bone animation
+                                                                         next.RotationOffset, duration);
+                    var scaleAnim = AnimationManager.GetVectorStepAnimation(entityAnimationInfo.Value.ScaleOffset,
+                                                                            next.ScaleOffset, duration);
                     handler.AddAnimation(entityAnimationInfo.Key, new EntityAnimationInfo(posAnim, rotAnim, scaleAnim, null));
-                   
                 }
             }
             return handler;
+        }
+
+        public AnimationKeys(Dictionary<TimeSpan, EntityAnimationInfo> keys) 
+        {
+            if (keys != null)
+               Keys = keys;
+            else Keys = new Dictionary<TimeSpan, EntityAnimationInfo>();
+            AnimationManager = new AnimationManager();
         }
     }
 }
